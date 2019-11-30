@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+    <script src="https://cdn.rawgit.com/matthewbryancurtis/aframe-star-system-component/db4f1030/index.js"></script>
+
+    <script>
+      AFRAME.registerComponent("sun", {
+        schema: {
+          start: {
+            type: "vec3",
+            default: {
+              x: 1,
+              y: 0,
+              z: 0
+            }
+          },
+          peak: {
+            type: "vec3",
+            default: {
+              x: 0,
+              y: 1,
+              z: 0
+            }
+          },
+          end: {
+            type: "vec3",
+            default: {
+              x: -1,
+              y: 0,
+              z: 0
+            }
+          },
+          duration: {
+            type: "int",
+            default: 5000
+          }
+        },
+        init() {
+          const sunPosition = {
+            x: this.data.start.x,
+            y: this.data.start.y,
+            z: this.data.start.z
+          };
+        },
+        update() {
+          const self = this;
+          AFRAME.ANIME({
+            targets: this.el,
+            translateX: [this.data.start.x, this.data.peak.x, this.data.end.x],
+            translateY: [this.data.start.y, this.data.peak.y, this.data.end.y],
+            translateZ: [this.data.start.z, this.data.peak.z, this.data.end.z],
+            duration: this.data.duration,
+            easing: "linear",
+            loop: true,
+            update(anim) {
+              const currentPosition = {
+                x: anim.animations[0].currentValue,
+                y: anim.animations[1].currentValue,
+                z: anim.animations[2].currentValue
+              };
+
+              self.moveSun(currentPosition);
+            }
+          });
+        },
+        moveSun(position) {
+          this.el.setAttribute("environment", {
+            lightPosition: {
+              x: position.x,
+              y: position.y,
+              z: position.z
+            }
+          });
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets> </a-assets>
+
+      <a-entity
+        environment="preset:forest; skyType:atmosphere; ground:hills; groundYScale:100"
+        sun="start: 1 -0.1 0; peak: 0 1 0 end: -1 -0.1 0; duration: 20000;"
+      ></a-entity>
+
+      <a-entity star-system="count:1000000"></a-entity>
+      <a-camera>
+        <a-cursor color="#FAFAFA"></a-cursor>
+      </a-camera>
+    </a-scene>
+  </body>
+</html>

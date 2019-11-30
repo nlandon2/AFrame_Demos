@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene environment="preset: forest; skyType: atmosphere">
+      <a-assets>
+        <img
+          id="my-slide"
+          crossorigin="anonymous"
+          src="https://i.postimg.cc/gJjMjwfX/Screenshot-2019-11-29-at-22-59-28.png"
+        />
+      </a-assets>
+
+      <a-image
+        src="#my-slide"
+        width="9.0711"
+        height="5"
+        position="0 2.2 3.5"
+      ></a-image>
+      <a-camera>
+        <a-cursor color="#FAFAFA"></a-cursor>
+      </a-camera>
+      <a-entity
+        text="value: Look behind you; color: #BBB"
+        position="2 1 -3"
+        scale="5 5 5"
+      ></a-entity>
+    </a-scene>
+  </body>
+</html>

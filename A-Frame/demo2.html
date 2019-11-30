@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/matthewbryancurtis/aframe-star-system-component/db4f1030/index.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <img
+          id="earth"
+          crossorigin="anonymous"
+          src="https://raw.githubusercontent.com/aframevr/sample-assets/master/assets/images/space/earth_atmos_4096.jpg"
+        />
+        <img
+          id="moon"
+          crossorigin="anonymous"
+          src="https://raw.githubusercontent.com/aframevr/sample-assets/master/assets/images/space/moon_1024.jpg"
+        />
+        <img
+          id="mars"
+          crossorigin="anonymous"
+          src="https://i.postimg.cc/g0JjhFnK/2k-mars.jpg"
+        />
+      </a-assets>
+
+      <a-sky color="black"></a-sky>
+      <a-entity star-system></a-entity>
+      <a-sphere position="0 2 15" radius="1" src="#mars"></a-sphere>
+      <a-sphere
+        position="0 1.5 -2.5"
+        radius="1"
+        src="#earth"
+        animation="property: rotation; from: 0 0 0; to: 0 -360 0; dur: 100000; easing: linear; loop: true"
+      >
+      </a-sphere>
+      <a-sphere position="2 2 -2.5" radius="0.25" src="#moon"> </a-sphere>
+      <a-camera>
+        <a-cursor color="#FAFAFA"></a-cursor>
+      </a-camera>
+    </a-scene>
+  </body>
+</html>
